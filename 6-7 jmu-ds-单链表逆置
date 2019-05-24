@@ -1,0 +1,69 @@
+Answer:
+
+
+
+void ReverseList(LinkList &L)
+{
+	LinkList p;
+	p=L->next;
+	ElemType a[100000];
+	int i=0;
+	while(p!=NULL){
+		a[i++]=p->data;
+		p=p->next;
+	}
+	p=L->next;
+	for(i=i-1;i>=0;i--){
+		p->data=a[i];
+		p=p->next;
+	}
+	p=NULL;
+}
+
+
+
+Problem:
+
+本题要求实现一个函数，将给定单向链表逆置，即表头置为表尾，表尾置为表头。链表为带头结点链表。请实现逆转函数。
+
+函数接口定义：
+void ReverseList(List &L);//将链表L逆置
+裁判测试程序样例：
+#include <iostream>
+using namespace std;
+typedef int ElemType;
+typedef struct LNode  		//定义单链表结点类型
+{
+	ElemType data;
+	struct LNode *next;		//指向后继结点
+} LNode,*LinkList;
+void CreateListR(LinkList &L, int n);//尾插法建链表
+void DispList(LinkList L);//输出链表
+void DestroyList(LinkList &L);//销毁链表
+void ReverseList(LinkList &L);//逆转链表
+int main() 
+{
+	LinkList L;
+	int n;
+	cin>>n;//输入链表节点个数
+	CreateListR(L,n);//尾插法建带头结点链表，细节不表
+	ReverseList(L);//逆转链表
+	DispList(L);//输出链表，细节不表
+	DestroyList(L);//销毁链尾，细节不表
+	return 0;
+}
+/* 请在这里填写答案 */
+输入说明：
+第一个数输入单链表结点个数n，后面输入n个正整数。
+
+输出说明：
+输出逆转后的单链表内容，数和数之间空格隔开，尾部不能有空格。若链表为空，输出 空链表!
+
+输入样例：
+5 1 2 3 4 5
+输出样例：
+5 4 3 2 1
+输入样例：
+0
+输出样例：
+空链表!
