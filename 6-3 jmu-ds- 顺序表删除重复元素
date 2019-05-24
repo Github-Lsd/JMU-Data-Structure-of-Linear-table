@@ -1,0 +1,91 @@
+Answer:
+
+
+
+void CreateSqList(List &L,int a[],int n)
+{
+	L=new (SqList);
+	for(int i=0;i<n;i++){
+		L->data[i]=a[i];
+	}
+	L->length=n;
+}
+void DispSqList(List L)
+{
+	if(L->length!=0){
+		cout<<L->data[0];
+		for(int i=1;i<L->length;i++){
+			cout<<" "<<L->data[i];
+		}
+	}
+}
+void DelSameNode(List &L)
+{
+	int i,j,k;
+	for(i=0;i<L->length;i++){
+		for(j=i+1;j<L->length;j++){
+			if(L->data[i]==L->data[j]){
+				for(k=j;k<L->length-1;k++){
+					L->data[k]=L->data[k+1];
+				}
+				L->length--;
+				j--;
+			}
+		}
+	}
+}
+
+
+
+
+Problem:
+
+设计一个算法，从顺序表中删除重复的元素，并使剩余元素间的相对次序保存不变。
+
+输入格式: 第一行输入顺序表长度。 第二行输入顺序表数据元素。中间空格隔开。
+输出格式：数据之间空格隔开，最后一项尾部不带空格。
+输出删除重复元素后的顺序表。
+你需要实现的函数有下面三个：
+函数接口定义：
+void CreateSqList(List &L,int a[],int n);  //创建顺序表
+void DispSqList(List L);//输出顺序表
+void DelSameNode(List &L) ;//删除顺序表重复元素
+L ：顺序表
+a ：输入数组
+n ：输入数据个数
+裁判测试程序样例：
+#define maxsize 50
+#include <iostream>
+using namespace std;
+typedef struct{
+	int data[maxsize];
+	int length;
+}SqList;
+typedef SqList *List;
+void CreateSqList(List &L,int a[],int n);
+void DispSqList(List L);
+void DestroyList(List &L);
+void DelSameNode(List &L) ;
+void DestroyList(List &L){
+	delete L;
+}
+int main()
+{
+	int i,n;
+	int a[maxsize];
+	List L;
+	cin>>n; 
+	for(i=0;i<n;i++)
+	   cin>>a[i];
+	 CreateSqList(L,a,n)  ;
+	 DelSameNode(L) ;
+	 DispSqList(L);  
+	 DestroyList(L);
+}
+
+/* 请在这里填写答案 */
+输入样例：
+5
+1 2 3 2 1
+输出样例：
+1 2 3
