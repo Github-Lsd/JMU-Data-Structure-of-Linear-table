@@ -1,0 +1,111 @@
+Answer:
+
+
+
+void CreateSqList(SqList &L,int n)
+{
+	 int i;
+	 L=new List();
+	 for(i=0;i<n;i++){
+	 	cin>>L->data[i]; 
+	 }
+	 L->length=n;
+}
+void InsertSq(SqList &L,int x)
+{
+	int i;
+	for(i=0;i<L->length;i++){
+		if(L->data[i]>x){
+			break;
+		}
+	}
+	if(i==L->length){
+		L->data[i]=x;
+	}
+	else{
+		int j;
+		for(j=L->length;j>i;j--){
+			L->data[j]=L->data[j-1]; 
+		}
+		L->data[j]=x;
+	}
+	L->length++;
+}
+void DispSqList(SqList L)
+{
+	if(L->length==0){
+		cout<<"error"<<endl; 
+	}
+	else{
+		cout<<L->data[0];
+		for(int i=1;i<L->length;i++){
+			cout<<" "<<L->data[i];
+		}
+	}
+}
+
+
+
+
+Problem:
+要求实现3个函数，在递增的顺序表中插入一个新整数，并保持该顺序表的有序性。
+
+数据结构定义
+typedef int ElemType; 
+typedef struct 
+{	ElemType data[MaxSize];		//存放顺序表元素
+   	int length ;					//存放顺序表的长度
+} List;	
+typedef List *SqList;
+函数接口定义：
+void CreateSqList(SqList &L,int n);
+void InsertSq(SqList &L,int x) ;
+void DispSqList(SqList L);
+
+需实现以上3个函数,分别为：
+
+CreateSqList：创建有序表，连续输入n个正数存入有序表中。L表示顺序表指针，n表示输入数据个数。
+InsertSq(SqList *&L,int x)：顺序表L中插入数据x。
+DispSqList:输出顺序表L中所有数据。数据间空格隔开，尾部不能有空格。
+裁判测试程序样例：
+#include <iostream>
+#define MaxSize 50
+using namespace std;
+typedef int ElemType; 
+typedef struct {	
+     ElemType data[MaxSize];		//存放顺序表元素
+   	int length ;					//存放顺序表的长度
+}List;	
+typedef List *SqList;
+void CreateSqList(SqList &L,int n);
+void InsertSq(SqList &L,int x) ;
+void DispSqList(SqList L);
+void DestroySqList(SqList &L);//销毁线性表
+int main()
+{
+     int n;
+	SqList L;
+	cin>>n; 
+	CreateSqList(L,n)  ;
+	 if(n>0)
+	{
+	 cin>>n;
+	 InsertSq(L,n) ;
+    }
+	 DispSqList(L);  
+	 DestroySqList(L);//细节不表
+}
+/* 请在这里填写答案 */
+
+
+输入说明：
+共两行。 行1：顺序表结点个数n，后面输入n个正整数。题目保证输入数是有序。 行2：输入插入的数据值。
+
+输出说明：
+输出插入新数据后的顺序表表内容，数和数之间空格隔开，尾部不能有空格。若有序表为空，输出 error
+
+输入样例：
+5 1 2 6 9 10
+3
+输出样例：
+1 2 3 6 9 10
