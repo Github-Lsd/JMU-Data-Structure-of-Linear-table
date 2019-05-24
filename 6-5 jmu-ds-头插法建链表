@@ -1,0 +1,86 @@
+Answer:
+
+
+
+void CreateListF(LinkList &L,int n)
+{
+	L=new(LNode);
+	LinkList p;
+	L->next=NULL;
+	for(int i=0;i<n;i++){
+		p=new(LNode);
+		cin>>p->data;
+		p->next=L->next;
+		L->next=p;
+	}
+}
+void DispList(LinkList L)
+{
+	LinkList p=L->next;
+	if(p!=NULL){
+		cout<<p->data;
+		p=p->next;
+		while(p!=NULL){
+			cout<<" "<<p->data;
+			p=p->next;
+		}
+	}
+	else{
+		cout<<"空链表!";
+	}
+}
+
+
+
+Problem:
+
+实现头插法建链表。需要实现下述两个函数：
+
+函数接口定义：
+void CreateListF(LinkList &L,int n);//头插法建链表，L表示带头结点链表，n表示数据元素个数
+void DispList(LinkList L);//输出链表
+裁判测试程序样例：
+#include <iostream>
+using namespace std;
+typedef int ElemType;
+typedef struct LNode  		//定义单链表结点类型
+{
+	ElemType data;
+	struct LNode *next;		//指向后继结点
+} LNode,*LinkList;
+void CreateListF(LinkList &L,int n);//头插法建链表
+void DispList(LinkList L);//输出链表
+void DestroyList(LinkList &L);//销毁链表
+int main() 
+{
+	LinkList L;
+	int n;
+	cin>>n;//输入链表节点个数
+	CreateListF(L,n);//头插法建链表
+	DispList(L);//输出链表
+	DestroyList(L);//销毁链表
+	return 0;
+}
+void DestroyList(LinkList &L) 
+{
+	LinkList p = L;
+ 	while (L) 
+	 {
+	  	p = L;
+	   	L = L->next;
+		delete p;
+	 }
+}
+
+/* 请在这里填写答案 */
+输入说明
+行1：数据个数
+行2：数据内容，空格隔开
+输出说明
+链表不空，输出链表内容。数据之间空格隔开，尾部不带空格
+链表为空，输出空链表!
+输入样例：
+5
+1 4 7 9 12
+输出样例：
+12 9 7 4 1
