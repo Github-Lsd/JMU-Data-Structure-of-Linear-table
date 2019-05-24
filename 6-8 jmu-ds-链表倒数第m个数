@@ -1,0 +1,75 @@
+Answer:
+
+
+
+int Find(LinkList L, int m )
+{
+	LinkList p,q;
+	p=L->next;
+	q=L->next; 
+	int i=1;
+	if(m<=0){
+		return -1;
+	} 
+	while(q!=NULL&&i<=m){
+		q=q->next;
+		i++;
+	}
+	if(q==NULL){
+		return -1;
+	}
+	else{
+		while(q!=NULL){
+			p=p->next;
+			q=q->next;
+		}
+		return p->data;
+	}
+}
+
+
+
+Problem:
+
+已知一个带有表头节点的单链表，查找链表中倒数第m个位置上的节点。
+
+输入要求：先输入链表结点个数，再输入链表数据，再输入m表示倒数第m个位置。
+输出要求，若能找到则输出相应位置，要是输入无效位置，则输出-1。
+要求实现函数为：
+
+函数接口定义
+int Find(LinkList L, int m );
+L:单链表
+m:倒数第m个位置
+裁判测试用例：
+#include <iostream>
+using namespace std;
+typedef int ElemType;
+typedef struct LNode  		//定义单链表结点类型
+{
+	ElemType data;
+	struct LNode *next;		//指向后继结点
+} LNode,*LinkList;
+void CreateListR(LinkList &L,int n);//尾插法建带头结点链表
+void DestroyList(LinkList &L);//销毁链表
+int Find(LinkList L, int m );//查找倒数第m个位置上的节点
+int main() 
+{
+	LinkList L;
+	int n,m;
+	cin>>n;
+	CreateListR(L,n);//尾插法建链表，细节不表
+	cin>>m;
+  cout<<Find(L,m );//查找倒数第m个位置上的节点
+	DestroyList(L);//细节不表
+	return 0;
+}
+/* 请在这里填写答案 */
+输入样例：
+在这里给出一组输入。例如：
+
+5
+1 2 3 4 5
+2
+输出样例：
+4
