@@ -1,0 +1,62 @@
+Answer:
+
+
+
+void CreateListR(LinkList &L, int n)
+{
+	LinkList p,num;
+	L=new(LNode);
+	p=L;
+	for(int i=0;i<n;i++){
+		num=new(LNode);
+		cin>>num->data;
+		p->next=num;
+		p=num;
+	}
+	p->next=NULL;
+ } 
+ 
+ 
+ 
+ 
+ Problem:
+ 
+ 实现尾插法建链表。需要实现下述建表函数：
+
+函数接口定义：
+void CreateListR(LinkList &L, int n);//尾插法建链表，L表示带头结点链表，n表示数据元素个数
+裁判测试程序样例：
+#include <iostream>
+using namespace std;
+typedef int ElemType;
+typedef struct LNode  		//定义单链表结点类型
+{
+	ElemType data;
+	struct LNode *next;		//指向后继结点
+} LNode,*LinkList;
+void CreateListR(LinkList &L, int n);//尾插法建链表
+void DispList(LinkList L);//输出链表
+void DestroyList(LinkList &L);//销毁链表
+int main()
+{
+	LinkList L;
+	int n;
+	cin>>n;//输入链表节点个数
+	CreateListR(L,n);//尾插法建链表
+	DispList(L);//输出链表，细节不表，可自行设计验证
+	DestroyList(L);//销毁链尾，细节不表
+	return 0;
+}
+
+/* 请在这里填写答案 */
+输入说明
+行1：数据个数
+行2：数据内容，空格隔开
+输出说明
+链表不空，输出链表内容。数据之间空格隔开，尾部不带空格
+链表为空，输出空链表!
+输入样例：
+5
+1 4 7 9 12
+输出样例：
+1 4 7 9 12
