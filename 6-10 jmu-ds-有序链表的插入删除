@@ -1,0 +1,154 @@
+Answer:
+
+
+
+void ListInsert(LinkList &L,ElemType e)//有序链表插入元素e
+{
+	LinkList p,s;
+	p=L;
+	while(p->next->data<e){
+		p=p->next;
+		if(p->next==NULL){
+			break;
+		}
+	}
+	s=new LNode();
+	if(p->next==NULL){
+		s->data=e;
+		p->next=s;
+		s->next=NULL;
+	}
+	else{
+		s->data=e;
+		s->next=p->next;
+		p->next=s;
+	}
+ } 
+void ListDelete(LinkList &L,ElemType e)//链表删除元素e
+{
+	LinkList p,q;
+	if(L->next!=NULL){
+		q=L;
+		p=q->next;
+		while(p->data!=e){
+			q=p;
+			p=p->next;
+			if(p==NULL){
+				break;
+			} 
+		}
+		if(p==NULL){
+			cout<<e<<"找不到！"<<endl;
+		}
+		else{
+			q->next=p->next;
+			delete p;
+		}
+	}
+}
+
+
+
+
+Problem:
+
+链表L是一个有序的带头结点链表，实现有序链表插入删除操作。实现函数为：
+
+函数接口定义：
+void ListInsert(LinkList &L,ElemType e);//有序链表插入元素e
+void ListDelete(LinkList &L,ElemType e);//链表删除元素e
+裁判测试程序样例：
+#include <iostream>
+using namespace std;
+typedef int ElemType;
+typedef struct LNode  		//定义单链表结点类型
+{
+	ElemType data;
+	struct LNode *next;		//指向后继结点
+} LNode,*LinkList;
+void CreateListR(LinkList &L,int n);//尾插法建链表
+void DispList(LinkList L);//输出链表
+void DestroyList(LinkList &L);//销毁链表
+void ListInsert(LinkList &L,ElemType e);//有序链表插入元素e
+void ListDelete(LinkList &L,ElemType e);//链表删除元素e
+int main() 
+{
+	LinkList L,L1,L2;
+	int n,e;
+	cin>>n;
+	CreateListR(L,n);//细节不表。
+	cin >> n;
+	while (n--)
+	{
+		cin >> e;
+		ListInsert(L, e);
+	}
+	cout << "插入数据后的链表:";
+	DispList(L);
+	cout << endl;
+	cin >> n;
+	while (n--)
+	{
+		cin >> e;
+		ListDelete(L, e);
+	}
+	cout << "删除数据后的链表:";
+	DispList(L);
+	DestroyList(L);//销毁链表，细节不表
+	return 0;
+}
+void DispList(LinkList L)
+{
+	LinkList p;
+	int flag=1;
+	p=L->next;
+	if (L->next == NULL)
+	{
+		cout << "空链表！";
+		return;
+	}
+	while(p){
+		if(flag) {
+			cout<<p->data;flag=0;
+		}
+		else {
+			cout<<" "<<p->data;	
+		}
+		p=p->next;
+	}
+}
+/* 请在这里填写答案 */
+输入说明：
+行1：链表数据个数
+行2：链表数据内容
+行3 ：插入数据个数
+行4：插入数据内容
+行5：删除数据个数
+行6：删除数据内容
+输出说明：
+删除函数中，如果找不到数据，输出X找不到！,其中X表示找不到数据。
+
+输入样例：
+5
+1 2 3 5 8
+3
+4 9 11
+3
+8 12 7
+
+输出样例：
+插入数据后的链表:1 2 3 4 5 8 9 11
+12找不到！
+7找不到！
+删除数据后的链表:1 2 3 4 5 9 11
+输入样例：
+3
+1 2 3
+1
+4
+5
+1 2 3 4 5
+
+输出样例：
+插入数据后的链表:1 2 3 4
+删除数据后的链表:空链表！
